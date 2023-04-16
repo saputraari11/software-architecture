@@ -1,0 +1,8 @@
+what is software architecture?
+
+Architecture Patterns is a collection of architectural styles in software development.
+
+what is goals of software architecture?
+
+the software we make will be easy to develop in the future scalable and easy to maintain
+

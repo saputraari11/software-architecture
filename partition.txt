@@ -1,0 +1,35 @@
+what is Architecture Partitions?
+
+software architecture depend on Partitions/storage structure
+
+how many Partitions in software architecture?
+
+Partition can be divided based on technical or domain.
+
+Note: Structural partitioning can be used in software architecture classifications
+
+what is Technical Partitioning?
+
+Technical Partitioning architecture divides the components in a system or application technically
+
+Example:  Layered (N-Tier) Architecture
+
+example of group technical:
+
+- presentation layer such as ui, web pages, and report or other that providing an interface for the user
+- business layer, logic business or conditional of business
+- service layer, transform data from persistence layer to business layer
+- persistence layer, interact to database system or sql query
+- database layer, table in database or in code is entity.
+
+Recommended for Monolithic Architecture
+
+what is Domain Partitioning?
+
+the division of the component structure in the system is grouped based on Domain / Features / Departments according to its business
+
+Note: All Technical Partitioning such as Presentation, Business Logic, Persistence, combined in per domain system
+
+Example of layer: Customer Domain, Product Domain, Message Domain, etc.
+
+Recommended for Distributed Architecture

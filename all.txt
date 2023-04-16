@@ -1,0 +1,207 @@
+=========== N-tier layered Architecture ======================
+
+Layered Architecture dibagi secara teknis, oleh karena itu komponen-komponen dalam Layered Architecture sama dengan Technical Partition
+
+Rata-rata banyak yang membagi menjadi 4 layer, Presentation Layer, Business Layer, Persistence Layer dan Database Layer. 
+
+Namun tidak menutup kemungkina bisa lebih banyak layer ketika aplikasi sangat kompleks
+
+sistem kerja N-tier layered architecture
+
+Dalam Layered Architecture, tiap Layer akan terisolasi, dan arah komunikasi hanya dilakukan dengan layer dibawah atau diatasnya
+
+Artinya, misal ketika Presentation Layer ingin mengambil data Product, Presentation Layer akan mengirim request ke Business Layer, 
+lalu akan mengambil data ke Persistence Layer dan baru masuk ke Database Layer
+
+Tidak direkomendasikan untuk langsung mengakses dari Presentation Layer langsung ke Database Layer misalnya
+
+kapan menggunakan N-tier layered?
+
+Layered Architecture adalah salah satu arsitektur yang banyak dimengerti dan digunakan
+
+Gunakan Layered Architecture jika kita masih bingung ingin menggunakan arsitektur apa, karena ini adalah arsitektur yang bagus untuk memulai aplikasi
+
+Namun jangan gunakan Layered Architecture ketika pembagian tim di perusahaan sudah berdasarkan domain, 
+
+lebih cocok menggunakan Distributed Architecture yang akan kita bahas di materi-materi selanjutnya
+
+
+=========== N-tier layered Architecture ======================
+
+======== hexagonal architecture =========================
+
+Hexagonal Architecture merupakan arsitektur yang dikembangkan dari Layered Architecture, 
+namun lebih baik ketika menangani perubahan teknologi yang terjadi
+
+Hexagonal Architecture juga dikenal dengan Port & Adapter Architecture
+
+Hexagonal Architecture sebenarnya dikenalkan dengan nama Port & Adapter Architecture, namun saat ini lebih populer dengan nama Hexagonal Architecture
+
+Port merupakan technology-agnostic yang merupakan sebuah OOP (Object Oriented Programming) Interface, 
+yang digunakan oleh kode aplikasi untuk berkomunikasi dengan pihak lain
+
+Adapter merupakan bagian yang berinteraksi langsung melalui Port, dan menggunakan teknologi yang sudah ditentukan
+
+Dalam Hexagonal Architecture, Application Layer akan berisi logika dan aturan bisnis, dimana kode yang dibuat akan berinteraksi hanya dengan Port, 
+tanpa tahu Adapter yang digunakan
+
+Hal ini agar tercapainya technology agnostic, sehingga ketika Adapter diubah, Application Layer tidak perlu berubah
+
+Selain itu, di dalam Application Layer, terdapat Domain Layer, yang berisikan representasi data domain aplikasi
+
+Bagian Driving, biasanya disebut User Interface / Transport Layer / Gateway, yaitu sumber request masuk ke aplikasi
+
+Bagian Driven, biasanya disebut Infrastructure / Data Source / External Interfaces, yaitu target data keluar dari aplikasi
+
+Hexagonal Architecture merupakan salah satu arsitektur yang bagus digunakan ketika kita akan membuat aplikasi yang kompleks 
+
+dan agar aplikasinya technology agnostic sehingga mudah diganti-ganti
+
+Namun pengembangan Hexagonal Architecture tidaklah semudah Layered Architecture, sehingga jika pengembang belum familiar dengan Hexagonal Architecture, 
+
+maka bisa terkendala ketika proses pengembangan
+
+======== hexagonal architecture =========================
+
+=========== Clean Architecture ======================
+
+Saat ini, terkenal juga arsitektur dengan nama Clean Architecture
+
+Jangan bingung jika harus memilih Hexagonal Architecture atau Clean Architecture
+
+Sebenarnya Clean Architecture tidak berbeda jauh dengan Hexagonal Architecture, 
+
+bahkan penulis buku Clean Architecture pun memang sudah menjelaskan bahwa salah satu referensi Clean Architecture adalah dari Hexagonal Architecture
+
+====== Example
+
+Misal kita memiliki aplikasi Web toko online, dimana kita akan membuat halaman pembayaran
+
+Dimana saat melakukan pembayaran, data pembayaran selain disimpan di database, akan dikirim ke Payment Gateway
+
+===========
+
+=========== Clean Architecture ======================
+
+=========== Microservice Architecture ======================
+
+Microservices Architecture adalah jenis arsitektur yang saat sedang banyak sekali digunakan oleh banyak orang. Namun arsitektur ini bukanlah jenis arsitektur yang sederhana, 
+
+ini adalah jenis arsitektur yang kompleks.
+
+Pada Microservices Architectures, system akan dibuat dalam jumlah aplikasi-aplikasi kecil atau disebut Service, dan digunakan untuk menyelesaikan tugas spesifik tertentu saja.
+
+Selain itu pada arsitektur ini, tiap Service akan di deploy dan dijalankan secara mandiri
+
+Pada arsitektur ini, tidak aneh jika sebuah system memiliki ratusan bahkan ribuan Service mandiri, hal ini karena tiap Service memang memiliki tugas masing-masing
+
+===== Topology 
+
+Biasanya dalam Microservices Architecture, setiap Service akan berjalan secara independent dan memiliki database masing-masing, 
+tidak melakukan sharing database dengan Service lain
+
+Biasanya juga tiap Service tidak akan di expose secara terbuka ke pengguna, melainkan pengguna akan melewati API Gateway, 
+yaitu aplikasi yang bertugas sebagai gerbang untuk menerima request dan meneruskan ke Service yang dituju
+
+Karena tiap Service memiliki tugas masing-masing, maka tidak jarang database yang digunakanpun bisa berbeda-beda, 
+hal ini karena biasanya Service akan menggunakan database yang sesuai dengan tugas yang harus dikerjakan
+
+======
+
+====== Bounded Context
+
+Seperti yang dijelaskan sebelumnya, bahwa tiap Service akan memiliki dan melakukan manajemen database nya sendiri
+Artinya database dan table tersebut hanya boleh diakses oleh Service tersebut
+
+Contoh misal ketika kita memiliki Service yang digunakan untuk melakukan management data Seller, 
+maka Seller Service yang hanya boleh melakukan management data Seller tersebut
+
+Konsep ini, disebut dengan Bounded Context, yang dikenalkan oleh Eric Evans pada buku Domain-Driven Design
+
+=======
+
+======= Komunikasi Antar Service
+
+Dengan adanya Bounded Context, artinya tidak ada yang boleh mengakses database Seller secara langsung dari Service lain kecuali Seller Service
+
+Jika ada Service lain yang membutuhkan data Seller, maka Service lain tersebut harus meminta data Seller ke Seller Service, 
+dengan cara komunikasi yang sudah ditentukan, misal RESTful API (Client-Server Architecture)
+
+======= Example 
+
+Pada halaman web toko online, kita ingin menampilkan data detail Product
+
+Namun pada halaman data detail Product, selain informasi Product, kita juga ingin menampilkan data Seller yang menjual Product tersebut
+
+Pada kasus ini, kita bisa mengambil data Product ke Product Service, lalu Product Service meminta data Seller ke Seller Service
+
+=======
+
+======= 
+
+======= Support 
+
+Untuk menggunakan Microservices Architecture biasanya tidak hanya melibatkan tim programmer
+
+Banyak sekali yang harus diubah seperti infrastructure dan tim product/bisnis
+
+Hal ini karena biasanya dalam Microservice Architecture, pembagian Service akan dilakukan berdasarkan domain bisnis, jadi tidak sederhana membuat aplikasi kecil
+
+Pada beberapa kasus, kesalahan pembuatan jenis Service bisa mempersulit tim pengembang, oleh karena itu diperlukan orang Domain Expert atau yang sudah ahli di bidangnya secara bisnis
+
+======= 
+
+Microservice Architecture biasanya digunakan di perusahaan yang sudah besar dengan tim pengembang yang banyak, 
+
+hal ini dikarenakan arsitektur ini menuntut banyak sekali pekerjaan selain pekerjaan membuat aplikasi, seperti infrastruktur, automation, deployment dan lain-lain
+
+Jangan gunakan arsitektur ini jika tim masih kecil, kita bisa mulai dengan Monolith Architecture dan Layered Architecture, 
+
+jika sudah waktunya membutuhkan scaling tim secara cepat, kita baru bisa mempertimbangkan penggunaan Microservices Architecture
+
+=========== Microservice Architecture ======================
+
+=========== Event Driven Architecture ======================
+
+======== Problem Microservice
+
+Dengan meningkatnya penggunaan Microservices Architecture, akhirnya terdapat salah satu masalah yang sering dialami pengguna arsitektur tersebut, 
+yaitu ketergantungan antar Service
+
+Contoh pada kasus sebelumnya misalnya, ketika Seller Service bermasalah, misal mati, maka kita tidak bisa melihat data Product, 
+hal ini karena Product Service butuh memanggil Seller Service ketika ingin menampilkan data Product
+
+======== 
+
+Event-Driven Architecture merupakan arsitektur yang menggunakan Async Proses untuk saling berkomunikasi antar Service
+
+Biasanya, pada arsitektur ini, Service akan mengirim setiap perubahan data yang terjadi pada Service tersebut ke aplikasi bernama Message Broker dalam bentuk data Event
+
+Pengirim data Event kita sebut dengan nama Producer/Publisher
+
+Service yang membutuhkan data Event nya akan mengambil data tersebut pada Message Broker
+
+Penerima data Event kita sebut dengan nama Consumer/Listener
+
+======== Dupilcate Data 
+
+Seperti yang sudah kita tahu, dalam Microservices Architecture terdapat aturan Bounded Context, dimana data hanya bisa diakses oleh Service itu sendiri
+
+Pada kasus Event-Driven Architecture, karena kita tidak akan memanggil secara Sync ke Service Lain (seperti menggunakan API Call), 
+maka biasanya Service akan meng-consume event data dan men-duplicate data yang dibutuhkan di database Service itu
+
+Pada kasus sebelumnya, contohnya Product Service akan meng-consume data Seller Event, lalu menyimpan data Seller ke database Product sebagai data duplicate
+
+======== 
+
+Event-Driven Architecture saat ini banyak yang menggunakan, karena permasalahan yang terjadi di Microservices Architecture, namun perlu diperhatikan, 
+ada juga akibat yang terjadi ketika kita menggunakan Async Process
+
+Pada kasus sebelumnya, kita harus memastikan data Seller Event diterima dengan baik oleh Product Service, 
+jika gagal secara otomatis data Seller tidak akan ada di database Product
+
+Async Process juga akan menyebabkan proses menjadi delay, oleh karena itu kadang pengguna tidak menerima hasil secara realtime, karena Async Process belum selesai
+
+Ketika terjadi masalah pada Async Process, melakukan pencarian masalah lebih sulit dibanding Sync Process pada arsitektur Microservices
+
+=========== Event Driven Architecture ======================

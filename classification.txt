@@ -1,0 +1,37 @@
+how many Classification in architecture Patterns?
+
+Software Architecture Patterns are broadly divided into two classifications, Monolithic and Distributed
+
+what is Monolithic?
+
+single deployment unit or running in one application
+
+what is Distributed?
+
+multiple deployment units, usually consisting of several applications
+
+what is benefit of Monolithic?
+
+- easy to implement
+- simple application
+- easy to Distributed
+
+what is benefit of Distributed?
+
+- easy to maintain application
+- consist of several unit 
+- service running safetly without another service
+
+when to use them?
+
+- little team
+- simple app 
+- without business requirement
+
+recommended: Monolithic Architecture
+
+- large team
+- complex app 
+- include business requirement
+
+recommended: Distributed Architecture
